@@ -15,9 +15,8 @@
 ### 9. Loadbalancer as L4 and L7
 ### 10. gcp cloud artifactory
 ### 11. enterprise GKE
-### 12. proxy use with CRI
-### 13. secret manager integration
-### 14. authentication authorization
-### 15. workload identity
-### 16. CICD with github actions
-### 17. Securing GKE
+### 12. secret manager integration
+### 13. authentication authorization
+### 14. workload identity
+### 15. CICD with github actions
+### 16. Securing GKE
