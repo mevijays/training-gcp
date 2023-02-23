@@ -9,7 +9,7 @@ variable "k8s_region" {
 
 variable "project_id" {
   type    = string
-  default = "mevijay-lab"
+  default = "mevijay-dev"
 }
 variable "subnet_name" {
   type    = string
