@@ -4,9 +4,16 @@ resource "google_service_account" "gkesa" {
   display_name = "gke-sa"
 }
   
-resource "google_service_account_iam_binding" "gke-account-bind" {
-  service_account_id = google_service_account.gkesa.name
-  role               = "roles/editor"
+resource "google_project_iam_binding" "project" {
+  project = var.project_id
+  role    = "roles/editor"
+
+  members = [
+    "google_service_account.gkesa.email",
+  ]
+  depends_on = [
+    google_service_account.gkesa
+  ]
 }
   
 resource "google_container_cluster" "primary" {
