@@ -4,17 +4,7 @@ resource "google_service_account" "gkesa" {
   display_name = "gke-sa"
 }
   
-resource "google_project_iam_binding" "project" {
-  project = var.project_id
-  role    = "roles/editor"
 
-  members = [
-    "serviceAccount:${google_service_account.gkesa.email}",
-  ]
-  depends_on = [
-    google_service_account.gkesa
-  ]
-}
   
 resource "google_container_cluster" "primary" {
   name                     = "${var.cluster_name}-${random_id.randhex.hex}"
