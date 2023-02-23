@@ -9,7 +9,7 @@ resource "google_project_iam_binding" "project" {
   role    = "roles/editor"
 
   members = [
-    "google_service_account.gkesa.email",
+    "serviceAccount:${google_service_account.gkesa.email}",
   ]
   depends_on = [
     google_service_account.gkesa
