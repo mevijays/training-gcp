@@ -1,0 +1,42 @@
+name: 'GCP gcloud'
+
+on:
+  workflow_dispatch:
+    inputs:
+      gcommand:
+        default: "gcloud info"
+        required: false
+        description: "Give the gcloud command"
+jobs:
+  google:
+    name: 'gcloud-google'
+
+    runs-on: mylab-docker
+
+    defaults:
+      run:
+        shell: bash
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+      with:
+        workload_identity_provider: 'projects/758849761540/locations/global/workloadIdentityPools/github/providers/github'
+        service_account: 'terraform-sa@mevijay-dev.iam.gserviceaccount.com'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v1'
+      with:
+        version: '>= 418.0.0'
+
+    - name: 'Use gcloud CLI'
+      run: ${{ github.event.inputs.gcommand }}
