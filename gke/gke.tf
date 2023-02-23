@@ -1,19 +1,14 @@
 // service account for gke
-resource "google_service_account" "default" {
+resource "google_service_account" "gkesa" {
   account_id   = "gke-sa"
   display_name = "gke-sa"
 }
   
-/*
- resource "google_project_iam_binding" "project" {
-  project = var.project_id
-  role    = "roles/editor"
-
-  members = [
-    "serviceAccount:${google_service_account.default.name}",
-  ]
+resource "google_service_account_iam_binding" "gke-account-bind" {
+  service_account_id = google_service_account.gkesa.name
+  role               = "roles/editor"
 }
-  */
+  
 resource "google_container_cluster" "primary" {
   name                     = "${var.cluster_name}-${random_id.randhex.hex}"
   location                 = var.k8s_region
