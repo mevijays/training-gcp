@@ -21,8 +21,8 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: mylab-vm
-    container:
-      image: sharmavijay86/k8s-runner:v1
+#    container:
+#      image: sharmavijay86/k8s-runner:v1
     environment: production
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
