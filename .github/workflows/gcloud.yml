@@ -60,11 +60,6 @@ jobs:
     - id: 'deploy'
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
-        service: 'dbpiret'
-        image: 'us-central1-docker.pkg.dev/mevijay-dev/forddb/myimage:latest'
-        env_vars: |
-          FOO=bar
-          ZIP=zap
         metadata: cloudrun/service.yaml
 
     - name: 'Use output'
