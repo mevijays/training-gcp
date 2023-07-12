@@ -1,0 +1,17 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  annotations:
+     run.googleapis.com/launch-stage: BETA
+  name: techpirets
+spec:
+  template:
+    metadata:
+      annotations:
+        run.googleapis.com/execution-environment: gen1 #or gen2
+    spec:
+      containers:
+      - image: us-central1-docker.pkg.dev/mevijay-dev/forddb/myimage:latest
+        ports:
+          - containerPort: 5000
+      
