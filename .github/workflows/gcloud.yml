@@ -3,10 +3,9 @@ name: 'GCP gcloud'
 on:
   workflow_dispatch:
     inputs:
-      gcommand:
-        default: "gcloud info"
-        required: false
-        description: "Give the gcloud command"
+      update:
+        type: boolean
+        default: true
 jobs:
   google:
     name: 'gcloud-google'
@@ -38,9 +37,6 @@ jobs:
       with:
         version: '>= 418.0.0'
         install_components: 'alpha,kubectl,gsutil'   
-
-    - name: 'Use gcloud CLI'
-      run: ${{ github.event.inputs.gcommand }}
     - name: docker login
       run: |
         gcloud auth configure-docker \
@@ -58,15 +54,16 @@ jobs:
         push: true
         tags: us-central1-docker.pkg.dev/mevijay-dev/forddb/myimage:latest
     - id: 'deploy'
+      if: ${{ github.event.inputs.update == 'true' }}
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
         metadata: cloudrun/service.yaml
-
-    - name: 'Use output'
-      run: 'curl "${{ steps.deploy.outputs.url }}"'
+    - name: update container
+      run: |
+        gcloud run services replace cloudrun/service.yaml
     - name: cloudrun url
       id: appurl
       run: |
-        gcloud run services list --platform managed | awk 'NR==2 {print $4}'
-    - run: echo "::notice title=${{ steps.appurl.outputs }}"
+        echo "URL=$(gcloud run services list --platform managed | awk 'NR==2 {print $4}')" >> $GITHUB_OUTPUT
+    - run: echo "::notice title=${{ steps.appurl.outputs.* }}"
  
