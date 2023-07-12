@@ -62,6 +62,10 @@ jobs:
       with:
         service: 'dbpiret'
         image: 'us-central1-docker.pkg.dev/mevijay-dev/forddb/myimage:latest'
+        env_vars: |
+          FOO=bar
+          ZIP=zap
+        metadata: cloudrun/service.yaml
 
     - name: 'Use output'
       run: 'curl "${{ steps.deploy.outputs.url }}"'
