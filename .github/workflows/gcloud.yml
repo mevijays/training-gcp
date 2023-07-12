@@ -64,4 +64,7 @@ jobs:
 
     - name: 'Use output'
       run: 'curl "${{ steps.deploy.outputs.url }}"'
+    - name: cloudrun url
+      run: |
+        gcloud run services list --platform managed | awk 'NR==2 {print $4}'
         
