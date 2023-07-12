@@ -57,7 +57,7 @@ jobs:
         push: true
         tags: us-central1-docker.pkg.dev/mevijay-dev/forddb/myimage:${{ steps.tag.outputs.tag }}
     - id: 'deploy'
-      if: ${{ github.event.inputs.update == 'true' }}
+      if: ${{ github.event.inputs.update == 'false' }}
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
         metadata: cloudrun/service.yaml
