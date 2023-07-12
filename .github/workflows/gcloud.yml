@@ -60,7 +60,7 @@ jobs:
         metadata: cloudrun/service.yaml
     - name: update container
       run: |
-        gcloud run services replace cloudrun/service.yaml
+        gcloud run services replace --region us-central1 cloudrun/service.yaml
     - name: cloudrun url
       id: appurl
       run: |
