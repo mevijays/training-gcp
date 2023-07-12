@@ -46,18 +46,25 @@ jobs:
       
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
+    - name: Image tag
+      id: tag
+      run: |
+        echo "tag=${GITHUB_SHA::6}" >> $GITHUB_OUTPUT
     - name: Build and push
       id: tag
       uses: docker/build-push-action@v4
       with:
         context: docker
         push: true
-        tags: us-central1-docker.pkg.dev/mevijay-dev/forddb/myimage:latest
+        tags: us-central1-docker.pkg.dev/mevijay-dev/forddb/myimage:${{ steps.tag.outputs.tag }}
     - id: 'deploy'
       if: ${{ github.event.inputs.update == 'true' }}
       uses: 'google-github-actions/deploy-cloudrun@v1'
       with:
         metadata: cloudrun/service.yaml
+    - name: update tag
+      run: |
+        sed -i 's/latest/${{ steps.tag.outputs.tag }}/g' cloudrun/service.yaml
     - name: update container
       run: |
         gcloud run services replace --region us-central1 cloudrun/service.yaml
@@ -65,5 +72,5 @@ jobs:
       id: appurl
       run: |
         echo "URL=$(gcloud run services list --platform managed | awk 'NR==2 {print $4}')" >> $GITHUB_OUTPUT
-    - run: echo "::notice title=${{ steps.appurl.outputs.* }}"
+    - run: echo "::notice title=${{ steps.appurl.outputs.URL }}"
  
