@@ -13,5 +13,5 @@ spec:
       containers:
       - image: us-central1-docker.pkg.dev/mevijay-dev/forddb/myimage:latest
         ports:
-          - containerPort: 5000
+          - containerPort: 80
       
