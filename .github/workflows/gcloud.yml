@@ -37,6 +37,7 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v1'
       with:
         version: '>= 418.0.0'
+        install_components: 'alpha,kubectl,gsutil'   
 
     - name: 'Use gcloud CLI'
       run: ${{ github.event.inputs.gcommand }}
