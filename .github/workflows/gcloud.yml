@@ -11,7 +11,7 @@ jobs:
   google:
     name: 'gcloud-google'
 
-    runs-on: mylab-docker
+    runs-on: ubuntu-latest
 
     defaults:
       run:
