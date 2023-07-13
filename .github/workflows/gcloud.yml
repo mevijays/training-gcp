@@ -72,6 +72,6 @@ jobs:
       run: |
         echo "URL=$(gcloud run services list --platform managed | awk 'NR==2 {print $4}')" >> $GITHUB_OUTPUT
     - run: |
-        echo "::notice:: ${{ steps.appurl.outputs.URL }}"
-        echo "::debug:: ${{ steps.appurl.outputs.URL }}"
+        echo "::notice title=URL:: ${{ steps.appurl.outputs.URL }}"
+
  
