@@ -1,5 +1,9 @@
 terraform {
-  backend "http" {
+  cloud {
+    organization = "mevijays"
+    workspaces {
+      name = "training-gcp"
+    }
   }
   required_providers {
     google = {
