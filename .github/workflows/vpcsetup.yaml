@@ -13,18 +13,13 @@ on:
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read  # This is required for actions/checkout
-env:
-  TF_HTTP_USERNAME: '${{ secrets.GITLAB_USER }}'
-  TF_HTTP_ADDRESS: '${{ secrets.GITLAB_URL }}/gcp'
-  TF_HTTP_PASSWORD: '${{ secrets.GITLAB_TOKEN }}'
+
 jobs:
   terraform:
     name: 'Terraform'
     runs-on: mylab-vm
-#    container:
-#      image: sharmavijay86/k8s-runner:v1
-    environment: production
-
+    container:
+      image: sharmavijay86/k8s-runner:v1
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
       run:
@@ -46,7 +41,8 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
       with:
-        terraform_version: 1.2.5
+          terraform_version: 1.5.5
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - run: terraform init 
       name: Terraform init
