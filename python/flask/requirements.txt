@@ -1,0 +1,24 @@
+# Core dependencies
+flask==2.3.3
+Werkzeug==2.3.7
+
+# Google Cloud dependencies
+google-cloud-bigquery==3.11.4
+google-cloud-pubsub==2.18.4
+google-cloud-container==2.21.0
+google-cloud-orchestration-airflow==1.16.0
+google-cloud-storage==2.10.0
+google-auth==2.22.0
+
+# Kubernetes
+kubernetes==27.2.0
+
+# HTTP and utils
+requests==2.31.0
+urllib3<2.0.0
+
+# Server
+gunicorn==21.2.0
+
+# Environment and config
+python-dotenv==1.0.0
