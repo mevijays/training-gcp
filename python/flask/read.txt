@@ -1,0 +1,19 @@
+1. BigQuery:
+- roles/bigquery.dataViewer
+- roles/bigquery.metadataViewer
+
+2. Pub/Sub:
+- roles/pubsub.viewer
+
+3. GKE:
+- roles/container.clusterViewer
+- roles/container.viewer
+
+4. Cloud Composer:
+- roles/composer.environmentViewer
+
+5. Cloud Storage:
+- roles/storage.objectViewer
+
+
+export GOOGLE_APPLICATION_CREDENTIALS=key.json
