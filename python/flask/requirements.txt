@@ -14,7 +14,7 @@ google-auth==2.22.0
 kubernetes==27.2.0
 
 # HTTP and utils
-requests==2.31.0
+requests==2.32.2
 urllib3<2.0.0
 
 # Server
