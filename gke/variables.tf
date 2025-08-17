@@ -48,7 +48,7 @@ variable "dns_zone_prefix" {
 //values for gke and node pool
 variable "cluster_name" {
   type        = string
-  default     = "gke"
+  default     = "prod-k8s"
   description = "gke cluster name"
 }
 variable "gke_num_nodes" {
@@ -76,4 +76,23 @@ variable "k8s_version" {
   type        = string
   default     = "1.24."
   description = "give verion name suffix as (.) as given in default data"
+}
+
+//values for monitoring and SLO
+variable "target_namespace" {
+  type        = string
+  default     = "app"
+  description = "Target namespace for deployment monitoring"
+}
+
+variable "slo_availability_target" {
+  type        = number
+  default     = 0.9
+  description = "SLO availability target (90% = 0.9)"
+}
+
+variable "slo_rolling_period_days" {
+  type        = number
+  default     = 7
+  description = "SLO rolling period in days"
 }
