@@ -41,11 +41,11 @@ resource "google_container_cluster" "primary" {
       enabled = true
     }
   }
- node_config {
-    preemptible     = true
-    machine_type    = var.node_size
-    disk_size_gb    = "60"
-    disk_type       = "pd-standard"
+  node_config {
+    preemptible  = true
+    machine_type = var.node_size
+    disk_size_gb = "60"
+    disk_type    = "pd-standard"
     oauth_scopes = [
       "https://www.googleapis.com/auth/cloud-platform"
     ]
